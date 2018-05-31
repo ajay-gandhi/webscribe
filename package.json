@@ -9,6 +9,7 @@
     "request": "^2.87.0",
     "textbelt": "0.0.3"
   },
+  "repository": "github:ajay-gandhi/webscribe",
   "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
