@@ -13,3 +13,5 @@ node app.js 8000
 ## Todo
 
 * Test that it works :eyes:
+* Grab new version of page upon subscribing
+* Remove caches when unsubscribing!
