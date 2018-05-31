@@ -54,6 +54,7 @@ app.listen(PORT, () => LOG.log(`Server running on port ${PORT}`));
 
 const INTERVAL = 1800000; // 30 minutes
 
+// Enables/disables dispatcher depending on whether there are subscriptions
 const toggleDispatcher = () => {
   const sub = subscriptions.all;
   if (Object.keys(sub).length && !dispatcher) {
@@ -66,15 +67,18 @@ const toggleDispatcher = () => {
   }
 };
 
+// Notify the specified phone numbers that the page at the given address
+// has changed
 const notify = (address, numbers) => {
   const message = `Webscribe: ${address} has changed`;
   numbers.forEach((n) => {
-    texbelt.sendText(n, message);
+    textbelt.sendText(n, message);
   });
 };
 
+// Iterate over all subscriptions and see if they've changed
+// For each subscription, compare page to cached version
 const checkSubscriptions = () => {
-  // For each subscription, compare page to cached version
   const sub = subscriptions.all;
   LOG.log("Checking subscriptions...");
 

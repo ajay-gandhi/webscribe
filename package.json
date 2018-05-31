@@ -7,7 +7,7 @@
     "configstore": "^3.1.2",
     "express": "^4.16.3",
     "request": "^2.87.0",
-    "textbelt": "0.0.3"
+    "textbelt": "0.0.4"
   },
   "repository": "github:ajay-gandhi/webscribe",
   "devDependencies": {},
