@@ -1,0 +1,25 @@
+{
+  "name": "webscribe",
+  "version": "0.0.1",
+  "description": "Subscribe to changes in webpages",
+  "main": "app.js",
+  "dependencies": {
+    "configstore": "^3.1.2",
+    "express": "^4.16.3",
+    "request": "^2.87.0",
+    "textbelt": "0.0.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "keywords": [
+    "change",
+    "webpage",
+    "detection",
+    "mobile"
+  ],
+  "author": "Ajay Gandhi",
+  "license": "ISC"
+}

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Subscribe</title>
+    <script>
+    // "create delete link"
+    const cdl = s => `<a href="/unsubscribe?a=${s.a}&n=${s.n}">&#128465;</a>`;
+
+    window.onload = function () {
+      var req = new XMLHttpRequest();
+      req.addEventListener("load", function () {
+        const data = JSON.parse(this.responseText);
+        if (data.length) {
+          const tableHeading = "<tr><th>Address</th><th>Number</th><th></th></tr>";
+          const tableContents = data
+            .map(s => `<td>${s.a}</td><td>${s.n}</td><td>${cdl(s)}</td>`)
+            .join('</tr><tr>');
+          document.querySelector("#subscriptions").innerHTML = `${tableHeading}<tr>${tableContents}</tr>`;
+        } else {
+          document.querySelector("#subscriptions").innerHTML = "<tr><td>No subscriptions</td></tr>";
+        }
+      });
+      req.open("GET", "/subscriptions");
+      req.send();
+    }
+    </script>
+    <style>
+    * {
+      color: #333;
+      text-decoration: none;
+    }
+    table, td, th {
+      border: 1px solid #888;
+      padding: 5px;
+      border-collapse: collapse;
+    }
+    #subscriptions {
+      margin-top: 2em;
+    }
+    </style>
+  </head>
+  <body>
+    <form action="/subscribe">
+      <input type="text" name="address" placeholder="URL" />
+      <input type="text" name="number" placeholder="Number" />
+      <button type="submit">Subscribe</button>
+    </form>
+    <table id="subscriptions">
+    </table>
+  </body>
+</html>
