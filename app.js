@@ -1,7 +1,6 @@
 
 const express = require("express");
 const request = require("request");
-const textbelt = require("textbelt");
 const Configstore = require("configstore");
 const pkg = require("./package.json");
 // const Logger = require("../util/logger");
@@ -9,6 +8,7 @@ const pkg = require("./package.json");
 // const LOG = new Logger("webscribe");
 const LOG = { log: console.log };
 const PORT = process.argv[2] || 9002;
+const TEXT_URL = require("./textApi.json").url;
 
 const subscriptions = new Configstore(`${pkg.name}-subscriptions`);
 const cache = new Configstore(`${pkg.name}-cache`);
@@ -70,9 +70,17 @@ const toggleDispatcher = () => {
 // Notify the specified phone numbers that the page at the given address
 // has changed
 const notify = (address, numbers) => {
-  const message = `Webscribe: ${address} has changed`;
+  const data = {
+    "phone": [16105091152],
+    "text": `Webscribe: ${address} has changed`,
+  };
   numbers.forEach((n) => {
-    textbelt.sendText(n, message);
+    request.post({
+      uri: TEXT_URL,
+      json: data,
+    }, (err) => {
+      if (err) LOG.log(err);
+    });
   });
 };
 
